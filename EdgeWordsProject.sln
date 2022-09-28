@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeWordsProject", "EdgeWordsProject\EdgeWordsProject.csproj", "{15FD2FF3-A4C1-4223-AA81-5D44B733CFB7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15FD2FF3-A4C1-4223-AA81-5D44B733CFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FD2FF3-A4C1-4223-AA81-5D44B733CFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FD2FF3-A4C1-4223-AA81-5D44B733CFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FD2FF3-A4C1-4223-AA81-5D44B733CFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5C87854D-57A2-4E6A-814D-68937C90DA19}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<RunConfiguration>
+		<EnvironmentVariables>
+			<SECRET_USERNAME>livija.rukmane@nfocus.co.uk</SECRET_USERNAME>
+			<SECRET_PASSWORD>LXeY7Gggx3J9Z5m</SECRET_PASSWORD>
+			<BASE_URL>https://www.edgewordstraining.co.uk/demo-site/</BASE_URL>
+		</EnvironmentVariables>
+	</RunConfiguration>
+</RunSettings>
+ 
