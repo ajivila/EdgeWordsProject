@@ -21,14 +21,12 @@ namespace EdgeWordsProject.Features
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Checkout")]
-    [NUnit.Framework.CategoryAttribute("testCase2")]
     public partial class CheckoutFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private static string[] featureTags = new string[] {
-                "testCase2"};
+        private static string[] featureTags = ((string[])(null));
         
 #line 1 "Checkout.feature"
 #line hidden
@@ -75,14 +73,22 @@ namespace EdgeWordsProject.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 3
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("user checks out using valid details")]
+        [NUnit.Framework.CategoryAttribute("testCase2")]
         public void UserChecksOutUsingValidDetails()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "testCase2"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("user checks out using valid details", null, tagsOfScenario, argumentsOfScenario, featureTags);
-#line 4
+#line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
@@ -92,20 +98,118 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
- testRunner.Given("User is logged in", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 6
- testRunner.And("user adds \'Beanie\' to their cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 3
+this.FeatureBackground();
 #line hidden
 #line 7
- testRunner.And("fills in valid billing details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Given("user adds \'Beanie\' to their cart", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
+                TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
+                            "name",
+                            "surname",
+                            "street",
+                            "city",
+                            "postcode",
+                            "phone"});
+                table1.AddRow(new string[] {
+                            "livija",
+                            "rukmane",
+                            "0 Nowhere Street",
+                            "Neverland",
+                            "N0 0NN",
+                            "01234567890"});
 #line 8
+ testRunner.And("fills in valid billing details:", ((string)(null)), table1, "And ");
+#line hidden
+#line 11
  testRunner.When("order is placed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 9
+#line 12
  testRunner.Then("correct order appears in user\'s account", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("adding items to the cart")]
+        [NUnit.Framework.CategoryAttribute("testCase1")]
+        [NUnit.Framework.TestCaseAttribute("Belt", null)]
+        [NUnit.Framework.TestCaseAttribute("Cap", null)]
+        public void AddingItemsToTheCart(string itemName, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "testCase1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("itemName", itemName);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("adding items to the cart", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 15
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 16
+ testRunner.Given("user is on the main shop page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 17
+ testRunner.When(string.Format("user adds a \'{0}\' to the cart", itemName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 18
+ testRunner.Then(string.Format("the \'{0}\' is added to the cart", itemName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("using a valid discount code")]
+        [NUnit.Framework.CategoryAttribute("testCase1")]
+        public void UsingAValidDiscountCode()
+        {
+            string[] tagsOfScenario = new string[] {
+                    "testCase1"};
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("using a valid discount code", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 3
+this.FeatureBackground();
+#line hidden
+#line 27
+ testRunner.Given("user\'s cart contains \'Beanie\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 28
+ testRunner.And("user is on the cart page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 29
+ testRunner.When("a discount code \'edgewords\' gets submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 30
+ testRunner.Then("a discount of \'15\'% is applied", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 31
+ testRunner.And("the correct total is calculated", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

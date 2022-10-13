@@ -13,6 +13,7 @@ namespace EdgeWordsProject.POMs
         private IWebElement ItemName => _driver.FindElement(By.CssSelector("td.product-name a"));
         private IWebElement DiscountCodeField => _driver.FindElement(By.Id("coupon_code"));
         private IWebElement DiscountCodeButton => _driver.FindElement(By.CssSelector("div.coupon button"));
+        private IWebElement RemoveButton => _driver.FindElement(By.CssSelector(".remove"));
         private string CouponAmount => _driver.FindElement(By.CssSelector("tr.cart-discount span")).Text;
         private string OriginalPrice => _driver.FindElement(By.CssSelector("span.amount bdi")).Text;
         private string ShippingCost => _driver.FindElement(By.CssSelector("label[for*=\"shipping\"] bdi")).Text;
@@ -26,6 +27,11 @@ namespace EdgeWordsProject.POMs
             return false;
         }
 
+        public void RemoveItem()
+        {
+            RemoveButton.Click();
+        }
+
         public void ApplyDiscount(string discountCode)
         {
             DiscountCodeField.Clear();
@@ -33,43 +39,43 @@ namespace EdgeWordsProject.POMs
             DiscountCodeButton.Click();
         }
 
-        private double toDouble(String num)
+        private decimal toDecimal(String num)
         {
             // remove £ sign
             num = num[1..];
 
             // convert to double
-            return double.Parse(num);
+            return Decimal.Parse(num);
         }
 
         // calculate the obtained discount as a percentage
-        public double getDiscountPercentage()
+        public decimal getDiscountPercentage()
         {
             // convert to numbers
-            double originalPrice = toDouble(OriginalPrice);
-            double couponAmount = toDouble(CouponAmount);
+            decimal originalPrice = toDecimal(OriginalPrice);
+            decimal couponAmount = toDecimal(CouponAmount);
 
             return couponAmount / originalPrice * 100;
         }
 
-        public double getOriginalPrice()
+        public decimal getOriginalPrice()
         {
-            return toDouble(OriginalPrice);
+            return toDecimal(OriginalPrice);
         }
 
-        public double getCouponAmount()
+        public decimal getCouponAmount()
         {
-            return toDouble(CouponAmount);
+            return toDecimal(CouponAmount);
         }
 
-        public double getShippingCost()
+        public decimal getShippingCost()
         {
-            return toDouble(ShippingCost);
+            return toDecimal(ShippingCost);
         }
 
-        public double getTotalCost()
+        public decimal getTotalCost()
         {
-            return toDouble(TotalCost);
+            return toDecimal(TotalCost);
         }
     }
 }

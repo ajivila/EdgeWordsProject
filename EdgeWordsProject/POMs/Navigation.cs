@@ -2,12 +2,12 @@
 
 namespace EdgeWordsProject.POMs
 {
-    internal class HomePage
+    internal class Navigation
     {
         private IWebDriver _driver;
 
         // Constructor to set driver object
-        public HomePage(IWebDriver driver) => _driver = driver;
+        public Navigation(IWebDriver driver) => _driver = driver;
 
         // Set locators
         private IWebElement MyAccountLink => _driver.FindElement(By.CssSelector("#menu-item-46 a"));

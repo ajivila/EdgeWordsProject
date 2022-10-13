@@ -7,27 +7,12 @@ namespace EdgeWordsProject.StepDefinitions
     [Binding]
     public class CheckoutStepDefinitions
     {
-
-        [Given(@"User is logged in")]
-        public static void GivenUserIsLoggedIn()
-        {
-            // navigate to account page
-            HomePage homePage = new(driver);
-            homePage.ClickAccountLink();
-
-            // log in using saved details
-            AccountPage accountPage = new(driver);
-            accountPage.LogIn(username, password);
-
-            Console.WriteLine($"Logging in user {username}\n");
-        }
-
         [Given(@"user adds '(.*)' to their cart")]
         public static void GivenUserAddsAnItemToTheirCart(string itemName)
         {
             // navigate to shop page
-            HomePage homePage = new(driver);
-            homePage.ClickShopLink();
+            Navigation navigation = new(driver);
+            navigation.ClickShopLink();
 
             // check if an item with given name exists
             ShopPage shopPage = new(driver);
@@ -40,8 +25,8 @@ namespace EdgeWordsProject.StepDefinitions
             Console.WriteLine($"{itemName} has been added to the cart\n");
         }
 
-        [Given(@"fills in valid billing details")]
-        public static void GivenFillsInValidBillingDetails()
+        [Given(@"fills in valid billing details:")]
+        public static void GivenFillsInValidBillingDetails(Table details)
         {
             // navigate to checkout
             ShopPage shopPage = new(driver);
@@ -49,9 +34,10 @@ namespace EdgeWordsProject.StepDefinitions
 
             // fill in billing details
             CheckoutPage checkoutPage = new(driver);
-            checkoutPage.FillName("Livija", "Rukmane");
-            checkoutPage.FillAddress("0 Nowhere Street", "Neverland", "N0 0NN");
-            checkoutPage.FillContactDetails("01234567890");
+            //foreach TableRow row in 
+            checkoutPage.FillName(details.Rows[0][0], details.Rows[0][1]);
+            checkoutPage.FillAddress(details.Rows[0][2], details.Rows[0][3], details.Rows[0][4]);
+            checkoutPage.FillContactDetails(details.Rows[0][5]);
 
             Console.WriteLine("Billing details filled in\n");
         }
@@ -73,11 +59,11 @@ namespace EdgeWordsProject.StepDefinitions
             CheckoutPage shopPage = new(driver);
             string orderNumber = shopPage.GetOrderNumber();
 
-            Console.WriteLine($"Order number recorded as: {orderNumber}\n"); 
+            Console.WriteLine($"Order number recorded as: {orderNumber}\n");
 
             // navigate to user's orders page
-            HomePage homePage = new(driver);
-            homePage.ClickAccountLink();
+            Navigation navigation = new(driver);
+            navigation.ClickAccountLink();
             AccountPage accountPage = new(driver);
             accountPage.ClickOrdersButton();
 

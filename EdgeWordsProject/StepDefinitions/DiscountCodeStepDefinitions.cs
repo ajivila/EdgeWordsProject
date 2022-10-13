@@ -8,50 +8,12 @@ namespace EdgeWordsProject.StepDefinitions
     public class DiscountCodeStepDefinitions
     {
 
-        [Given(@"user is registered")]
-        public static void GivenUserIsRegistered()
-        {
-            Console.WriteLine("User pre-registered manually\n");
-        }
-
-        [Given(@"user is on the account page")]
-        public static void GivenUserIsOnTheAccountPage()
-        {
-            // navigate to account page
-            HomePage homePage = new(driver);
-            homePage.ClickAccountLink();
-        }
-
-        [When(@"user logs in using correct log in details")]
-        [Given(@"user is logged in")]
-        public static void WhenUserLogsInUsingCorrectLogInDetails()
-        {
-            // log in using saved details
-            AccountPage accountPage = new(driver);
-            accountPage.LogIn(username, password);
-
-            Console.WriteLine($"Logging in {username}\n");
-        }
-
-        [Then(@"user gets logged in successfuly")]
-        public static void ThenUserGetsLoggedInSuccessfuly()
-        {
-            // retreive any error messages
-            AccountPage accountPage = new(driver);
-            string errorMessage = accountPage.GetErrorMessage();
-
-            // if no error message appears, assume log in successful
-            Assert.That(String.IsNullOrEmpty(errorMessage), Is.True, errorMessage);
-
-            Console.WriteLine("User logged in successfully\n");
-        }
-
         [Given(@"user is on the main shop page")]
         public static void GivenUserIsOnTheMainShopPage()
         {
             // navigate to shop page
-            HomePage homePage = new(driver);
-            homePage.ClickShopLink();
+            Navigation navigation = new(driver);
+            navigation.ClickShopLink();
         }
 
         [When(@"user adds a '(.*)' to the cart")]
@@ -88,8 +50,8 @@ namespace EdgeWordsProject.StepDefinitions
         public static void GivenUsersCartContainsItem(string itemName)
         {
             // navigate to shop page
-            HomePage homePage = new(driver);
-            homePage.ClickShopLink();
+            Navigation navigation = new(driver);
+            navigation.ClickShopLink();
 
             // add an item to the cart
             ShopPage shopPage = new(driver);
@@ -102,8 +64,8 @@ namespace EdgeWordsProject.StepDefinitions
         public static void GivenUserIsOnTheCartPage()
         {
             // navigate to cart page
-            HomePage homePage = new(driver);
-            homePage.ClickCartLink();
+            Navigation navigation = new(driver);
+            navigation.ClickCartLink();
         }
 
         [When(@"a discount code '(.*)' gets submitted")]
@@ -116,29 +78,19 @@ namespace EdgeWordsProject.StepDefinitions
             Console.WriteLine($"Discount code {discountCode} is being applied\n");
         }
 
-        [Then(@"a discount is applied")]
-        public static void ThenADiscountOfIsApplied(Table percentages)
+        [Then(@"a discount of '(\d*)'% is applied")]
+        public static void ThenADiscountOfIsApplied(decimal percentage)
         {
             // calculate the obtained discount
             CartPage cartPage = new(driver);
-            double obtainedDiscount = cartPage.getDiscountPercentage();
+            decimal obtainedDiscount = cartPage.getDiscountPercentage();
 
-            // check obtained discount against test parameters
-            foreach (TableRow percentage in percentages.Rows)
-            {
-                Console.WriteLine($"Checking if {percentage[0]}% discount achieved...");
+            // check obtained discount against test parameter
 
-                try
-                {
-                    Assert.That(double.Parse(percentage[0]) == obtainedDiscount);
-                    Console.WriteLine($"Discount of {percentage[0]}% achieved\n");
-                }
-                // usually wouldn't catch this but made an exception due to project spec
-                catch (AssertionException)
-                {
-                    Console.WriteLine($"Discount of {percentage[0]}% not achieved\n");
-                }
-            }
+            Console.WriteLine($"Checking if {percentage}% discount achieved...");
+
+            Assert.That(percentage == obtainedDiscount, $"Discount incorrect at {obtainedDiscount}%\n");
+            Console.WriteLine($"Discount of {percentage}% achieved\n");
         }
 
         [Then(@"the correct total is calculated")]
@@ -147,35 +99,12 @@ namespace EdgeWordsProject.StepDefinitions
             CartPage cartPage = new(driver);
 
             // Check that the total is calculated correctly
-            double expectedTotal = cartPage.getOriginalPrice() -
+            decimal expectedTotal = cartPage.getOriginalPrice() -
                 cartPage.getCouponAmount() + cartPage.getShippingCost();
             Assert.That(expectedTotal == cartPage.getTotalCost(),
                 $"Total expected to be {expectedTotal}, actual result: {cartPage.getTotalCost}");
 
             Console.WriteLine($"Total confirmed as correct at £{expectedTotal}\n");
-        }
-
-        [When(@"user logs out")]
-        public static void WhenUserLogsOut()
-        {
-            // log out
-            HomePage homePage = new(driver);
-            homePage.ClickAccountLink();
-            AccountPage accountPage = new(driver);
-            accountPage.LogOut();
-
-            Console.WriteLine("User getting logged out...");
-        }
-
-        [Then(@"user gets logged out")]
-        public static void ThenUserGetsLoggedOut()
-        {
-            // check that log out has been successful
-            AccountPage accountPage = new(driver);
-            Assert.That(accountPage.isLoggedOut(),
-                "user has not been logged out");
-
-            Console.WriteLine("User logged out successfully\n");
         }
     }
 }

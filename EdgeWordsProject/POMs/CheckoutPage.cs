@@ -56,7 +56,7 @@ namespace EdgeWordsProject.POMs
         }
 
         public string GetOrderNumber()
-        {;
+        {
             return OrderNumber;
         }
     }
